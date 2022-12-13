@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Численные методы</title>
+
+    <link rel="stylesheet" href="plugin/reveal/reset.css">
+    <link rel="stylesheet" href="plugin/reveal/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css" id="theme">
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="plugin/katex/katex.min.css">
+
+    <style>
+        .reveal h1 {
+            font-size: 80px;
+        }
+
+        .reveal h2 {
+            font-size: 80px;
+        }
+
+        .button_pm {
+            height: 50px;
+            width: 50px;
+        }
+
+        .button_eval_and_fill {
+            height: 50px;
+            width: 175px;
+        }
+
+        .arr_row {
+            height: 300px;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section data-markdown>
+                <script type="text/template" foreground-color="black">
+						Численные методы
+						=============
+					</script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+						### Определение численных методов
+
+						**Численные (вычислительные) методы** — методы решения математических задач в численном виде.  
+                        Представление как исходных данных в задаче, так и её решения — в виде числа или набора чисел.	
+					</script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+						### Определение СЛАУ
+
+						**Система линейных алгебраических уравнений (СЛАУ)** — система уравнений, каждое уравнение в которой является линейным — алгебраическим уравнением первой степени. 
+                        В классическом варианте коэффициенты при переменных, свободные члены и неизвестные считаются вещественными числами, но все методы и результаты сохраняются (либо естественным образом обобщаются) на случай любых полей, например, комплексных чисел.
+						
+					</script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template" font=50px>
+						### Общий вид системы
+
+						Исходная система выглядит следующим образом:  
+                        $a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}$\
+                        $a_{21}x_{1} + ... + a_{2n}x_{n} = b_{2}$\
+                        $...$\
+                        $a_{m1}x_{1} + ... + a_{mn}x_{n} = b_{m}$
+					</script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                        ### Запись СЛАУ в матричной форме  
+
+                        Её можно записать в матричном виде:\
+                        $Ax = b$\
+                        где $A$ - основа матрицы системы,\
+                        $b$ — столбец свободных членов.
+					</script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                        ### Общий вид системы
+
+                        Согласно свойству элементарных преобразований над строками,
+                        основную матрицу этой системы можно привести к ступенчатому виду:\
+                        $\alpha_{1j1}x_{j1} + \alpha_{1j2}x_{j2} + ... + \alpha_{1jr}x_{jr} + ... + \alpha_{1jn}x_{jn} = \beta_{1}$\
+                        $\alpha_{2j2}x_{j2} + ... + \alpha_{2jr}x_{jr} + ... + \alpha_{2jn}x_{jn} = \beta_{2}$\
+                        $...$\
+                        $\alpha_{rjr}x_{jr} + ... + \alpha_{rjn}x_{jn} = \beta_{r}$\
+                        $0 = \beta_{r}$\
+                        $...$\
+                        $0 = \beta_{r}$\
+                    </script>
+            </section>
+
+            <section class = "gauss">
+                <div class="arr_row" style="font-size: 20px;"></div>
+                <input class="button_eval_and_fill" type="button" onclick="fillArray()" value="Сгенерировать матрицу" />
+                <input class="button_pm" type="button" onclick="addRow()" value="+"/><br>
+                <input class="button_eval_and_fill" type="button" onclick="" value="Прокалькулировать" />
+                <input class="button_pm" type="button" onclick="removeRow()" value="-" />
+            </section>
+
+            <section>
+                <p>Спасибо за внимание!</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="plugin/reveal/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script src="plugin/katex/katex.js"></script>
+    <script src="js/gauss.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            dependencies: [
+                {
+                    src: 'plugin/menu/menu.js',
+                    src: 'plugin/jump/jump.js',
+                    async: true
+                }
+            ],
+            menu: {
+                side: 'left',
+                numbers: true,
+                markers: true,
+                titleSelector: 'h1, h2, h3, h4, h5, h6',
+                useTextContentForMissingTitles: true,
+                hideMissingTitles: false,
+                transitions: true,
+                openButton: true,
+                keyboard: true
+            },
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX]
+        });
+    </script>
+</body>
+
+</html>
