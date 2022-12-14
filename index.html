@@ -33,7 +33,7 @@
         }
 
         .arr_row {
-            height: 300px;
+            height: 450px;
             width: auto;
         }
     </style>
@@ -70,14 +70,16 @@
             </section>
 
             <section data-markdown>
-                <script type="text/template" font=50px>
+                <script type="text/template">
 						### Общий вид системы
 
-						Исходная система выглядит следующим образом:  
-                        $a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}$\
-                        $a_{21}x_{1} + ... + a_{2n}x_{n} = b_{2}$\
-                        $...$\
-                        $a_{m1}x_{1} + ... + a_{mn}x_{n} = b_{m}$
+						Исходная система выглядит следующим образом:
+                        <p style="text-align: right">  
+                            $a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}$\
+                            $a_{21}x_{1} + ... + a_{2n}x_{n} = b_{2}$\
+                            $...$\
+                            $a_{m1}x_{1} + ... + a_{mn}x_{n} = b_{m}$
+                        </p>
 					</script>
             </section>
 
@@ -92,32 +94,164 @@
 					</script>
             </section>
 
-            <section data-markdown>
+            <section data-markdown style="font-size: 30px;">
                 <script type="text/template">
                         ### Общий вид системы
 
                         Согласно свойству элементарных преобразований над строками,
-                        основную матрицу этой системы можно привести к ступенчатому виду:\
-                        $\alpha_{1j1}x_{j1} + \alpha_{1j2}x_{j2} + ... + \alpha_{1jr}x_{jr} + ... + \alpha_{1jn}x_{jn} = \beta_{1}$\
-                        $\alpha_{2j2}x_{j2} + ... + \alpha_{2jr}x_{jr} + ... + \alpha_{2jn}x_{jn} = \beta_{2}$\
-                        $...$\
-                        $\alpha_{rjr}x_{jr} + ... + \alpha_{rjn}x_{jn} = \beta_{r}$\
-                        $0 = \beta_{r}$\
-                        $...$\
-                        $0 = \beta_{r}$\
+                        основную матрицу этой системы можно привести к ступенчатому виду:
+                        <p style="text-align: right">
+                            $\alpha_{1j1}x_{j1} + \alpha_{1j2}x_{j2} + ... + \alpha_{1jr}x_{jr} + ... + \alpha_{1jn}x_{jn} = \beta_{1}$<br>
+                            $\alpha_{2j2}x_{j2} + ... + \alpha_{2jr}x_{jr} + ... + \alpha_{2jn}x_{jn} = \beta_{2}$<br>
+                            $...$<br>
+                            $\alpha_{rjr}x_{jr} + ... + \alpha_{rjn}x_{jn} = \beta_{r}$<br>
+                            $0 = \beta_{r}$<br>
+                            $...$<br>
+                            $0 = \beta_{r}$
+                        </p>
                     </script>
             </section>
 
             <section class = "gauss">
-                <div class="arr_row" style="font-size: 20px;"></div>
-                <input class="button_eval_and_fill" type="button" onclick="fillArray()" value="Сгенерировать матрицу" />
-                <input class="button_pm" type="button" onclick="addRow()" value="+"/><br>
-                <input class="button_eval_and_fill" type="button" onclick="" value="Прокалькулировать" />
-                <input class="button_pm" type="button" onclick="removeRow()" value="-" />
+                <p>Нахождение корней СЛАУ методом Гаусса</p>
+                <div class="arr_row" style="font-size: 15px;"></div>
+                <input class="button_eval_and_fill" type="button" onclick="fillArray(0)" value="Сгенерировать матрицу" />
+                <input class="button_pm" type="button" onclick="addRow(0)" value="+"/><br>
+                <input class="button_eval_and_fill" type="button" onclick="renderRoots(0)" value="Прокалькулировать" />
+                <input class="button_pm" type="button" onclick="removeRow(0)" value="-" />
             </section>
 
-            <section>
-                <p>Спасибо за внимание!</p>
+            <section data-markdown>
+                <script type="text/template">
+                        ### Метод для нахождения корней по Гауссу
+
+                        ```
+                        function gaussRoots(a, b, N) {
+                            let _b = [];
+                            var mass = [];
+                            for (let i = 0; i < N; i++) {
+                                _b[i] = b[i];
+                                mass[i] = [];
+                                for (let j = 0; j < N; j++) {
+                                    mass[i][j] = a[i][j];
+                                }
+                            }
+                        
+                            for (let i = 0; i < N - 1; i++) {
+                                if (mass[i][i] == 0) {
+                                    for (let k = i + 1; k < N; k++) {
+                                        if (mass[k][i] != 0) {
+                                            for (let m = 0; m < N; m++) {
+                                               mass[i][m] += mass[k][m];
+                                            }
+                                            _b[i] += _b[k];
+                                            break;
+                                        }
+                                    }
+                                }
+                        
+                                let coef;
+                                for (let j = i + 1; j < N; j++) {
+                                    coef = mass[j][i] / mass[i][i];
+                                    _b[j] -= _b[i] * coef;
+                                    for (let k = i; k < N; k++) {
+                                        mass[j][k] -= mass[i][k] * coef;
+                                    }
+                                }
+                            }
+                            
+                            let x = []
+                            for (let i = N - 1; i >= 0; i--) {
+                                for (let j = N - 1; j > i; j--) {
+                                    _b[i] -= x[j] * mass[i][j];
+                                }
+                                x[i] = _b[i] / mass[i][i];
+                            }
+                        
+                            return x;
+                        }
+                        ```
+                    </script>
+            </section>
+
+            <section class = "lu">
+                <p>Нахождение корней СЛАУ методом LU разложения</p>
+                <div class="arr_row" style="font-size: 15px;"></div>
+                <input class="button_eval_and_fill" type="button" onclick="fillArray(1)" value="Сгенерировать матрицу" />
+                <input class="button_pm" type="button" onclick="addRow(1)" value="+"/><br>
+                <input class="button_eval_and_fill" type="button" onclick="renderRoots(1)" value="Прокалькулировать" />
+                <input class="button_pm" type="button" onclick="removeRow(1)" value="-" />
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                        ### Метод для нахождения корней LU-разложением
+
+                        ```
+                        function LURoots(a, b, N) {
+                            let l = [];
+                            let u = [];
+                        
+                            for (let i = 0; i < N; i++) {
+                                l[i] = [];
+                                u[i] = [];
+                                for (let j = 0; j < N; j++) {
+                                    if (i == j)
+                                        l[i][j] = 1;
+                                    else
+                                        l[i][j] = 0;
+                                    u[i][j] = 0;
+                                }
+                            }
+                        
+                            let  t;
+                            for (let  i = 0; i < N; i++) {
+                                for (let  j = 0; j < N; j++) {
+                                    t = 0;
+                                    if (i <= j) {
+                                        for (let  k = 0; k < i; k++) {
+                                            t += l[i][k] * u[k][j];
+                                        }
+                                        u[i][j] = a[i][j] - t;
+                                    } else {
+                                        for (let  k = 0; k < j; k++) {
+                                            t += l[i][k] * u[k][j];
+                                        }
+                                        l[i][j] = (a[i][j] - t) / u[j][j];
+                                    }
+                                }
+                            }
+                        
+                            let y = gaussRoots(l, b, N);
+                            let x = gaussRoots(u, y, N);
+                        
+                            return x;
+                        }
+                        ```
+                    </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                        ### Невязка
+                        **Невязка** - количественная мера несоответствия между правыми и   
+                       левыми частями системы уравнений при подстановки в них вычислительного решения.
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                        ### Вычисление невязки
+                        Пусть $\overline{x}$ - точное решение системы $A\overline{x} = \overline{b}$  
+                        и $\tilde{x}$ - решение, найденное с помощью численных методов, тогда  
+                        невязка равна $\overline{r} = A(\overline{x} - \tilde{x}) = \overline{b} - A\tilde{x}$
+                </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                    ### Спасибо за внимание!
+                </script>
             </section>
         </div>
     </div>
@@ -127,7 +261,7 @@
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
     <script src="plugin/math/math.js"></script>
-    <script src="plugin/katex/katex.js"></script>
+    <script src="plugin/katex/katex.min.js"></script>
     <script src="js/gauss.js"></script>
     <script>
         Reveal.initialize({
