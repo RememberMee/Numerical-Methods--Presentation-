@@ -135,9 +135,9 @@ function fillArray(num) {
 
     for (let i = 0; i < countRow - 1; i++) {
         for (let j = 0; j < countRow - 1; j++) {
-            document.querySelectorAll('.arr_row')[num].querySelector('#arr_input' + i + '' + j).value = Math.floor(Math.random() * 20);
+            document.querySelectorAll('.arr_row')[num].querySelector('#arr_input' + i + '' + j).value = Math.floor(Math.random() * 20) * Math.pow(-1, Math.round(Math.random()));
         }
-        document.querySelectorAll('.arr_row')[num].querySelector('#b_input' + i).value = Math.floor(Math.random() * 20);
+        document.querySelectorAll('.arr_row')[num].querySelector('#b_input' + i).value = Math.floor(Math.random() * 20) * Math.pow(-1, Math.round(Math.random()));
     }
     renderToStr(num);
 }
@@ -155,15 +155,15 @@ function addRow(num) {
         row.className = "input" + j;
         let str = '';
         for (let i = 0; i < countRow; i++) {
-            str += `<input type="number" id="arr_input` + j + "" + i + `" size = "1" value = "` + Math.floor(Math.random() * 20) + `">` + 
-            //str += `<input type="text" id="arr_input` + j + "" + i + `" size = "3" value = "` + Math.floor(Math.random() * 20) + `" onchange = "` + renderToStr() + `"> ` + 
+            let value = Math.floor(Math.random() * 20) * Math.pow(-1, Math.round(Math.random()));
+            str += `<input type="number" id="arr_input` + j + "" + i + `" size = "1" value = "` + value + `">` + 
             katex.renderToString("x_{" + i + "}");
-            if (i != countRow - 1)
+            if(i != countRow - 1){
                 str += " + ";
+            }
         }
         row.innerHTML = str +
-            //` = <input type="text" id="b_input` + j + `" size="3" value = "` + Math.floor(Math.random() * 20) + `" onchange = "` + renderToStr() + `"><br>`;
-            ` = <input type="number" id="b_input` + j + `" size="2" value = "` + Math.floor(Math.random() * 20) + `"><br>`;
+            ` = <input type="number" id="b_input` + j + `" size="2" value = "` + Math.floor(Math.random() * 20) * Math.pow(-1, Math.round(Math.random())) + `"><br>`;
             document.querySelectorAll('.arr_row')[num].appendChild(row);
     }
 
@@ -226,11 +226,14 @@ function renderToStr(num) {
             if(document.querySelectorAll('.arr_row')[num].querySelector('#arr_input' + i + '' + j)?.value != undefined) {
                 value = document.querySelectorAll('.arr_row')[num].querySelector('#arr_input' + i + '' + j).value;
                 if(value != 0) {
-                    str += value + "x_{" + j + "} + ";
-                    if(j == countRow - 2) {
-                        str = str.substring(0, str.length - 3);
+                    if(j != 0) {
+                        if(value > 0 && str != "") {
+                            str += " + ";
+                        }
                     }
+                    str += value + "x_{" + j + "} ";
                 }
+                
             }
         }
         if(document.querySelectorAll('.arr_row')[num].querySelector('#b_input' + i)?.value != undefined) {
