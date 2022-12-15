@@ -155,7 +155,7 @@ function addRow(num) {
         row.className = "input" + j;
         let str = '';
         for (let i = 0; i < countRow; i++) {
-            str += `<input type="text" id="arr_input` + j + "" + i + `" size = "2" value = "` + Math.floor(Math.random() * 20) + `">` + 
+            str += `<input type="number" id="arr_input` + j + "" + i + `" size = "1" value = "` + Math.floor(Math.random() * 20) + `">` + 
             //str += `<input type="text" id="arr_input` + j + "" + i + `" size = "3" value = "` + Math.floor(Math.random() * 20) + `" onchange = "` + renderToStr() + `"> ` + 
             katex.renderToString("x_{" + i + "}");
             if (i != countRow - 1)
@@ -163,8 +163,20 @@ function addRow(num) {
         }
         row.innerHTML = str +
             //` = <input type="text" id="b_input` + j + `" size="3" value = "` + Math.floor(Math.random() * 20) + `" onchange = "` + renderToStr() + `"><br>`;
-            ` = <input type="text" id="b_input` + j + `" size="2" value = "` + Math.floor(Math.random() * 20) + `"><br>`;
+            ` = <input type="number" id="b_input` + j + `" size="2" value = "` + Math.floor(Math.random() * 20) + `"><br>`;
             document.querySelectorAll('.arr_row')[num].appendChild(row);
+    }
+
+    
+    for (let j = 0; j < countRow; j++) {
+        for (let i = 0; i < countRow; i++) {
+            document.querySelectorAll('.arr_row')[num].querySelector('#arr_input' + i + '' + j).onchange = function() {
+            renderToStr(num);
+            };
+        }
+        document.querySelectorAll('.arr_row')[num].querySelector('#b_input' + j).onchange = function() {
+            renderToStr(num);
+        };
     }
 
     if(num == 0){

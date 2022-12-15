@@ -36,6 +36,9 @@
             height: 450px;
             width: auto;
         }
+        input {
+            width: 50px;
+        }
     </style>
 </head>
 
@@ -74,7 +77,7 @@
 						### Общий вид системы
 
 						Исходная система выглядит следующим образом:
-                        <p style="text-align: right">  
+                        <p style="text-align: right; margin-right: 220px;">  
                             $a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}$\
                             $a_{21}x_{1} + ... + a_{2n}x_{n} = b_{2}$\
                             $...$\
@@ -100,7 +103,7 @@
 
                         Согласно свойству элементарных преобразований над строками,
                         основную матрицу этой системы можно привести к ступенчатому виду:
-                        <p style="text-align: right">
+                        <p style="text-align: right; margin-right: 80px;">
                             $\alpha_{1j1}x_{j1} + \alpha_{1j2}x_{j2} + ... + \alpha_{1jr}x_{jr} + ... + \alpha_{1jn}x_{jn} = \beta_{1}$<br>
                             $\alpha_{2j2}x_{j2} + ... + \alpha_{2jr}x_{jr} + ... + \alpha_{2jn}x_{jn} = \beta_{2}$<br>
                             $...$<br>
@@ -112,7 +115,7 @@
                     </script>
             </section>
 
-            <section class = "gauss">
+            <section class = "gauss" data-menu-title="Нахождение корней СЛАУ методом Гаусса">
                 <p>Нахождение корней СЛАУ методом Гаусса</p>
                 <div class="arr_row" style="font-size: 15px;"></div>
                 <input class="button_eval_and_fill" type="button" onclick="fillArray(0)" value="Сгенерировать матрицу" />
@@ -174,8 +177,8 @@
                     </script>
             </section>
 
-            <section class = "lu">
-                <p>Нахождение корней СЛАУ методом LU разложения</p>
+            <section class = "lu" data-menu-title="Нахождение корней СЛАУ методом LU-разложения">
+                <p>Нахождение корней СЛАУ методом LU-разложения</p>
                 <div class="arr_row" style="font-size: 15px;"></div>
                 <input class="button_eval_and_fill" type="button" onclick="fillArray(1)" value="Сгенерировать матрицу" />
                 <input class="button_pm" type="button" onclick="addRow(1)" value="+"/><br>
@@ -269,7 +272,6 @@
             dependencies: [
                 {
                     src: 'plugin/menu/menu.js',
-                    src: 'plugin/jump/jump.js',
                     async: true
                 }
             ],
