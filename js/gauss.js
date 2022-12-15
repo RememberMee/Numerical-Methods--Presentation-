@@ -215,12 +215,12 @@ function renderToStr(num) {
     if(document.querySelectorAll('.arr_row')[num].querySelector(".katex_output") == null) {
         var elem = document.createElement('div');
         elem.className = "katex_output";
+        elem.style.marginTop = "15px";
         document.querySelectorAll('.arr_row')[num].appendChild(elem);
     }
     document.querySelectorAll('.arr_row')[num].querySelector(".katex_output").innerHTML = "";
-        
+    let str = `\\begin{cases} `;
     for (let i = 0; i < countRow; i++) {
-        let str = "";
         let value;
         for (let j = 0; j < countRow; j++) {
             if(document.querySelectorAll('.arr_row')[num].querySelector('#arr_input' + i + '' + j)?.value != undefined) {
@@ -239,12 +239,12 @@ function renderToStr(num) {
         if(document.querySelectorAll('.arr_row')[num].querySelector('#b_input' + i)?.value != undefined) {
             value = document.querySelectorAll('.arr_row')[num].querySelector('#b_input' + i).value;
             if(value != null) {
-                str += " = " + value + "\\\\";
+                str += " = " + value + `\\\\`;
             }
         }
-
-        document.querySelectorAll('.arr_row')[num].querySelector(".katex_output").innerHTML += katex.renderToString(str);
     }
+    str += `\\end{cases}`;
+    document.querySelectorAll('.arr_row')[num].querySelector(".katex_output").innerHTML += katex.renderToString(str);
 }
 
 addRow(0);

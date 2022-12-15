@@ -39,6 +39,46 @@
         input {
             width: 50px;
         }
+        .braces {
+            position: relative;
+            padding: .3em .5em;
+            margin-left: 4em;
+            }
+        .braces::before,
+        .braces::after,
+        .curly::before,
+        .curly::after {
+            content: "";
+            position:absolute;
+            width: .8em;
+            height: 25%;
+        }
+        .braces::before,
+        .braces::after {
+            left: 0;
+            border-left: 2px solid;
+        }
+        .braces::before {
+            top: 0;
+            border-top-left-radius: .8em;
+        }
+        .braces::after {
+            bottom: 0;
+            border-bottom-left-radius: .8em;
+        }
+        .curly::before,
+        .curly::after {
+            left: -.8em;
+            border-right: 2px solid;
+        }
+        .curly::before {
+            top: 25%;
+            border-bottom-right-radius: .8em;
+        }
+        .curly::after {
+            bottom: 25%;
+            border-top-right-radius: .8em;
+        }
     </style>
 </head>
 
@@ -77,12 +117,14 @@
 						### Общий вид системы
 
 						Исходная система выглядит следующим образом:
-                        <p style="text-align: right; margin-right: 220px;">  
-                            $a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}$\
-                            $a_{21}x_{1} + ... + a_{2n}x_{n} = b_{2}$\
-                            $...$\
-                            $a_{m1}x_{1} + ... + a_{mn}x_{n} = b_{m}$
-                        </p>
+                        <div class="braces">
+                            <div class="curly" style="text-align: right; margin-right: 220px;">
+                                $a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}$  <br>
+                                $a_{21}x_{1} + ... + a_{2n}x_{n} = b_{2}$  <br>
+                                $...$  <br>
+                                $a_{m1}x_{1} + ... + a_{mn}x_{n} = b_{m}$
+                            </div>
+                          </div>   
 					</script>
             </section>
 
@@ -103,15 +145,17 @@
 
                         Согласно свойству элементарных преобразований над строками,
                         основную матрицу этой системы можно привести к ступенчатому виду:
-                        <p style="text-align: right; margin-right: 80px;">
-                            $\alpha_{1j1}x_{j1} + \alpha_{1j2}x_{j2} + ... + \alpha_{1jr}x_{jr} + ... + \alpha_{1jn}x_{jn} = \beta_{1}$<br>
-                            $\alpha_{2j2}x_{j2} + ... + \alpha_{2jr}x_{jr} + ... + \alpha_{2jn}x_{jn} = \beta_{2}$<br>
-                            $...$<br>
-                            $\alpha_{rjr}x_{jr} + ... + \alpha_{rjn}x_{jn} = \beta_{r}$<br>
-                            $0 = \beta_{r}$<br>
-                            $...$<br>
-                            $0 = \beta_{r}$
-                        </p>
+                        <div class="braces">
+                            <div class="curly" style="text-align: right; margin-right: 80px;">
+                                $\alpha_{1j1}x_{j1} + \alpha_{1j2}x_{j2} + ... + \alpha_{1jr}x_{jr} + ... + \alpha_{1jn}x_{jn} = \beta_{1}$<br>
+                                $\alpha_{2j2}x_{j2} + ... + \alpha_{2jr}x_{jr} + ... + \alpha_{2jn}x_{jn} = \beta_{2}$<br>
+                                $...$<br>
+                                $\alpha_{rjr}x_{jr} + ... + \alpha_{rjn}x_{jn} = \beta_{r}$<br>
+                                $0 = \beta_{r}$<br>
+                                $...$<br>
+                                $0 = \beta_{r}$
+                            </div>
+                          </div>
                     </script>
             </section>
 
